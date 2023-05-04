@@ -19,14 +19,21 @@ function GetPlayerList() {
 </script>
 
 <template>
-  <h1>Hello World</h1>
+  <div>
+    <h1>获取玩家列表</h1>
   <button @click="GetPlayerList">获取玩家列表</button>
 
   <ul>
   <li v-for="score in score123.value">
     {{ score.rank }}  {{ score.name }}####{{ score.kill }} / {{ score.dead }} {{ score.weaponS0 }}
   </li>
+
 </ul>
+  </div>
+
 </template>
 <style scoped>
+
+
+
 </style>

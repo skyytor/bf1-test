@@ -7,3 +7,4 @@
     <h1>This is an rules page</h1>
   </div>
 </template>
+
