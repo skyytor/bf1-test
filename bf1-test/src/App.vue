@@ -6,7 +6,7 @@
     <div class="whole">
 
 
-        <div class="aside">
+        <div class="nav">
                 <router-link to="/home">主页</router-link>
                 <router-link to="/power">权限</router-link>
                 <router-link to="/rules">规则</router-link>
@@ -34,17 +34,17 @@
   display: flex;
   background-color: aliceblue;
 }
-.aside{
-    border: 2px ridge rgb(248, 185, 185);
-    background-color: rgb(245, 255, 241);
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    flex: 0 1 20%;
-    overflow-y: auto;
-    height: 95vh;
-    
+.nav a{
+
+  border: 1px solid #f7aaaa;
+  width: 80px;
+  height: 30px;
+  text-decoration: none;
+  line-height: 30px;
+  text-align: center;
 }
+    
+
 /* .theme {
     border: 2px ridge rgb(248, 185, 185);
     background-color: rgb(245, 255, 241);
