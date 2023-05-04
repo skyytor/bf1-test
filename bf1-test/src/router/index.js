@@ -5,6 +5,8 @@ import rulesView from "../views/rulesView.vue";
 import monitorView from "../views/monitorView.vue";
 import chatView from "../views/chatView.vue";
 import AboutView from "../views/AboutView.vue";
+import scoreView from "../views/scoreView.vue";
+import detailsView from "../views/detailsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,11 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: AboutView,
+    },
+    {
+      path: "/score",
+      name: "score",
+      component: scoreView,
     },
   ],
 });
