@@ -22,6 +22,16 @@ const router = createRouter({
       component: powerView,
     },
     {
+      path: "/score",
+      name: "score",
+      component: scoreView,
+    },
+    {
+      path: "/details",
+      name: "details",
+      component: detailsView,
+    },
+    {
       path: "/rules",
       name: "rules",
       component: rulesView,
@@ -41,11 +51,8 @@ const router = createRouter({
       name: "about",
       component: AboutView,
     },
-    {
-      path: "/score",
-      name: "score",
-      component: scoreView,
-    },
+    
+    
   ],
 });
 
