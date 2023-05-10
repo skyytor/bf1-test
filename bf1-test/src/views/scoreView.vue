@@ -1,39 +1,78 @@
-<script setup>
-import axios from 'axios'
-import { ref,reactive } from 'vue';
-
-
-const score123 = reactive([])
-
-console.log(score123);
-function GetPlayerList() {
-  axios({
-    method:'get',
-    url: 'http://localhost:5051/Player/GetPlayerList',
-  }).then(function (scores){
-    score123.value=scores.data;
-    console.log(scores);
-  })
-}
-
-</script>
-
 <template>
   <div>
-    <h1>获取玩家列表</h1>
-  <button @click="GetPlayerList">获取玩家列表</button>
-
-  <ul>
-  <li v-for="score in score123.value">
-    {{ score.rank }}  {{ score.name }}####{{ score.kill }} / {{ score.dead }} {{ score.weaponS0 }}
-  </li>
-
-</ul>
+    <h3>得分板</h3>
+    <div class="score">
+      <ScoreTeam :playerList="playerList1" />
+      <ScoreTeam :playerList="playerList2" />
+    </div>
   </div>
-
 </template>
+
+<script setup>
+import { ref, inject, onMounted, onUnmounted } from 'vue'
+
+import ScoreTeam from '@/components/Scoreboard.vue'
+
+const axios = inject('$axios')
+
+const playerList1 = ref([])
+const playerList2 = ref([])
+
+const timer = null;
+
+onMounted(() => {
+  console.log('onMounted');
+  getGamePlayerList();
+});
+
+onUnmounted(() => {
+  console.log('onUnmounted');
+  clearTimeout(timer);
+});
+
+function getGamePlayerList() {
+  axios.get('http://127.0.0.1:10086/Player/GetGamePlayerList')
+    .then((res) => {
+      console.log(res);
+
+      playerList1.value = [];
+      playerList2.value = [];
+
+      res.data.forEach((item, index) => {
+        if (item.teamId == 1)
+          playerList1.value.push(item);
+        // else if (item.teamId == 2)
+        //     playerList2.value.push(item);
+
+        if (item.rank > 149) {
+          playerList2.value.push(item);
+        }
+      })
+
+      playerList1.value.sort((a, b) => {
+        return b.score - a.score;
+      });
+
+      playerList2.value.sort((a, b) => {
+        return b.score - a.score;
+      });
+
+      /* timer = setTimeout(() => {
+        getGamePlayerList();
+      }, 5000); */
+    }).catch((err) => {
+      console.log(err);
+    })
+}
+</script>
+
 <style scoped>
+h3 {
+  text-align: center;
+  font-size: 24px;
+}
 
-
-
+.score {
+  display: flex;
+}
 </style>
